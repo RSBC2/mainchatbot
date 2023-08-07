@@ -1,1 +1,1 @@
-web: gunicorn irsfreshstarttaxbot:app
+web: gunicorn app:app
