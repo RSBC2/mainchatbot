@@ -1,8 +1,11 @@
 from flask import Flask, request, jsonify, render_template
 import openai
+import os
+from dotenv import load_dotenv
 
-# Load the OpenAI API key directly
-openai.api_key = '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'
+# Load the OpenAI API key from .env file
+load_dotenv()
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
 app = Flask(__name__)
 
