@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tax Resolution Assistant</title>
+</head>
+<body>
+    <h1>Tax Resolution Assistant</h1>
+    <div id="chat-area">
+    </div>
+    <form>
+        <input type="text" id="user-input">
+        <button type="submit">Send</button>
+    </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+    $('form').on('submit', function(e) {
+        e.preventDefault();
+
+        var userMessage = $('#user-input').val();
+
+        $.ajax({
+            url: '/chat',
+            data: JSON.stringify({ 'message': userMessage }),
+            type: 'POST',
+            contentType: 'application/json',
+            success: function(response) {
+                $('#chat-area').append('<p>User: ' + userMessage + '</p>');
+                $('#chat-area').append('<p>Sarah: ' + response.message + '</p>');
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+
+        $('#user-input').val('');
+    });
+    </script>
+</body>
+</html>
